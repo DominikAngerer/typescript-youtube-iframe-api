@@ -23,11 +23,14 @@ export class YoutubeController extends Controller {
             clearTimeout(this.timer);
         }
         this.timer = setTimeout(() => {
-            if (typeof(shim('YT')) === 'undefined' || typeof(shim('YT').Player) === 'undefined') {
-                let tag = document.createElement('script');
-                tag.src = 'https://www.youtube.com/iframe_api';
-                let firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            if (typeof (shim('YT')) === 'undefined' || typeof (shim('YT').Player) === 'undefined') {
+                if(document.querySelectorAll('#youtube-iframe-api').length <= 0) {
+                    let tag = document.createElement('script');
+                    tag.src = 'https://www.youtube.com/iframe_api';
+                    tag.id = 'youtube-iframe-api';
+                    let firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                }
                 this.initPlayer();
             } else {
                 YoutubeController.YT = shim('YT');
@@ -44,8 +47,8 @@ export class YoutubeController extends Controller {
             width: '100%',
             videoId: this.$().getAttribute('data-youtube'),
             events: {
-                'onReady': this.onPlayerReady,
-                'onStateChange': this.onPlayerStateChange
+                'onReady': () => { this.onPlayerReady() },
+                'onStateChange': () => { this.onPlayerStateChange() }
             }
             });
         } else {
