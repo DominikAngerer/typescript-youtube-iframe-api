@@ -47,8 +47,8 @@ export class YoutubeController extends Controller {
             width: '100%',
             videoId: this.$().getAttribute('data-youtube'),
             events: {
-                'onReady': () => { this.onPlayerReady() },
-                'onStateChange': () => { this.onPlayerStateChange() }
+                'onReady': () => { this.onPlayerReady(); },
+                'onStateChange': () => { this.onPlayerStateChange(); }
             }
             });
         } else {
