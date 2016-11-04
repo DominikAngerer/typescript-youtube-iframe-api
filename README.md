@@ -4,7 +4,7 @@
 
 To install this project
 ```
-git clone git@github.com:DominikAngerer/typescript-social-share.git typescript-social-share
+git clone git@github.com:DominikAngerer/typescript-youtube-iframe-api.git typescript-youtube-iframe-api
 ```
 
 Now run:
